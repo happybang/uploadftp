@@ -22,6 +22,23 @@ module.exports = {
       });
     });
   },
+  get(dest) {
+    return new Promise((resolve, reject) => {
+      ftp.get(dest, (err, rs) => {
+        if (err) {
+          reject(err);
+          return;
+        }
+        let data = "";
+        rs.on("data", chunk => {
+          data += chunk;
+        });
+        rs.on("end", () => {
+          resolve(data);
+        });
+      });
+    });
+  },
   mkdir(dest) {
     return new Promise(resolve => {
       ftp.mkdir(dest, true, err => {

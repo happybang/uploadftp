@@ -1,6 +1,6 @@
 {
   "name": "uploadftp",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "fast upload files to ftp server with single command",
   "main": "index.js",
   "bin": {
