@@ -1,11 +1,13 @@
 #!/usr/bin/env node
 
-let ftp = require("./ftp");
+let Ftp = require("./ftp");
 let fs = require("fs");
 let path = require("path");
 
 let cwd = process.cwd();
 let option = require(path.resolve(cwd, "./uploadftpOption"));
+
+let ftp = new Ftp();
 
 let upload = async (src, dest) => {
   console.log("from: ", src);

@@ -1,30 +1,31 @@
-let Ftp = require("ftp");
+let FtpClient = require("ftp");
 
-let ftp = new Ftp();
-
-module.exports = {
+class Ftp {
+  constructor() {
+    this.ftp = new FtpClient();
+  }
   connect(option) {
     return new Promise(resolve => {
-      ftp.on("ready", resolve);
-      ftp.connect(option);
+      this.ftp.on("ready", resolve);
+      this.ftp.connect(option);
     });
-  },
+  }
   end() {
-    ftp.end();
-  },
+    this.ftp.end();
+  }
   put(src, dest) {
     return new Promise(resolve => {
-      ftp.put(src, dest, err => {
+      this.ftp.put(src, dest, err => {
         if (err) {
           throw err;
         }
         resolve();
       });
     });
-  },
+  }
   get(dest) {
     return new Promise((resolve, reject) => {
-      ftp.get(dest, (err, rs) => {
+      this.ftp.get(dest, (err, rs) => {
         if (err) {
           reject(err);
           return;
@@ -38,10 +39,10 @@ module.exports = {
         });
       });
     });
-  },
+  }
   mkdir(dest) {
     return new Promise(resolve => {
-      ftp.mkdir(dest, true, err => {
+      this.ftp.mkdir(dest, true, err => {
         if (err) {
           throw err;
         }
@@ -49,4 +50,6 @@ module.exports = {
       });
     });
   }
-};
+}
+
+module.exports = Ftp;

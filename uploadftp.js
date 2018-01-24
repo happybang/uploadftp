@@ -1,12 +1,14 @@
 #!/usr/bin/env node
 
-let ftp = require("./ftp");
+let Ftp = require("./ftp");
 let fs = require("fs");
 let path = require("path");
 
 let cwd = process.cwd();
 
-module.exports = option => {
+module.exports = async option => {
+  let ftp = new Ftp();
+
   if (!option) {
     option = require(path.resolve(cwd, "./uploadftpOption"));
   }
@@ -48,5 +50,5 @@ module.exports = option => {
     console.log("uploadftp end !");
   };
 
-  uploadftp();
+  await uploadftp();
 };
